@@ -1,6 +1,6 @@
 require 'colorize'
 
-# method for the empty board
+# method for displaying an empty board
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 def display_board board
@@ -12,16 +12,7 @@ def display_board board
     puts "C #{board[6]} | #{board[7]} | #{board[8]}"
 end
 
-# method for testing if the spot is available
-# def availability move
-#     if move == "X" || "O"
-#         puts "Move has been taken! Please try again."
-#     else
-#         move_on_board(move)
-#     end
-# end
-
-# player token
+# method if player is an "X" or "O"
 def player_token num
     if num == 1
         player_token = "X"
@@ -57,19 +48,34 @@ def move_on_board move, board, num
     display_board(board)
 end
 
-# method for checking if there is a winner or draw
-def winning board
-    winner = [
-        ["a1", "a2", "a3"],
-        ["a1", "b2", "c3"],
-        ["a1", "b1", "c1"],
-        ["b1", "b2", "b3"],
-        ["c1", "c2", "c3"],
-        ["c1", "b2", "a3"],
-        ["a2", "b2", "c2"],
-        ["a3", "b3", "c3"]
-    ]
+# method for testing if the spot is available
+def availability position
+    if position == " "
+        true
+    else
+        puts "That spot is taken! Try again"
+    end
 end
+
+# method for checking if there is a winner or draw
+# def winning board
+#     winner = [
+#         [board[0], board[1], board[2]],
+#         [board[0], board[4], board[8]],
+#         [board[0], board[3], board[6]],
+#         [board[3], board[4], board[5]],
+#         [board[6], board[7], board[8]],
+#         [board[6], board[4], board[2]],
+#         [board[1], board[4], board[7]],
+#         [board[2], board[5], board[8]]
+#     ]
+
+#     winner.each_with_index do |item, i|
+#         if winner[i] == ["X", "X", "X"] || ["O", "O", "O"]
+#             puts "We have a winner!!"
+#         end
+#     end
+# end
 
 # welcome the players
 puts "Let's play Tic Tac Toe!"
@@ -81,12 +87,14 @@ puts display_board(board)
 sleep 1
 
 # create loop until there is a win, draw or they would like to cancel the game
+while true
 
     # instruct player one to choose a position  
     print "Player One >> Please select one coordinate for your move (eg. a3): "
     player_one_move = gets.chomp.downcase
     puts
 
+    availability(player_one_move)
     # present the board with the position of player one
     move_on_board(player_one_move, board, 1)
     puts
@@ -96,13 +104,12 @@ sleep 1
     player_two_move = gets.chomp.downcase
     puts
 
+    availability(player_two_move)
     # place player_one_move into the board
     move_on_board(player_two_move, board, 2)
     puts
 
-    # check if they are a winner
-
-# end
+end
 
 # set up a win message, draw message and goodbye message dependent on the outcome
 
