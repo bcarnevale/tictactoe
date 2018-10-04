@@ -12,33 +12,50 @@ def display_board board
     puts "C #{board[6]} | #{board[7]} | #{board[8]}"
 end
 
+# method for testing if the spot is available
+# def availability move
+#     if move == "X" || "O"
+#         puts "Move has been taken! Please try again."
+#     else
+#         move_on_board(move)
+#     end
+# end
+
+# player token
+def player_token num
+    if num == 1
+        player_token = "X"
+    else
+        player_token = "O"
+    end
+end
+
 # method for adding input to board
-def move_on_board move, board
+def move_on_board move, board, num
+    token = player_token(num)
     if move == "a1"
-        board[0] = "X"
+        board[0] = "#{token}"
     elsif move == "a2"
-        board[1] = "X"
+        board[1] = "#{token}"
     elsif move == "a3"
-        board[2] = "X"
+        board[2] = "#{token}"
     elsif move == "b1"
-        board[3] = "X"
+        board[3] = "#{token}"
     elsif move == "b2"
-        board[4] = "X"
+        board[4] = "#{token}"
     elsif move == "b3"
-        board[5] = "X"
+        board[5] = "#{token}"
     elsif move == "c1"
-        board[6] = "X"
+        board[6] = "#{token}"
     elsif move == "c2"
-        board[7] = "X"
+        board[7] = "#{token}"
     elsif move == "c3"
-        board[8] = "X"
+        board[8] = "#{token}"
     else
         puts "Try again!"
     end
-    p display_board(board)
+    display_board(board)
 end
-
-# method for testing if the spot is available
 
 # method for checking if there is a winner or draw
 def winning board
@@ -65,19 +82,23 @@ sleep 1
 
 # create loop until there is a win, draw or they would like to cancel the game
 
-    # instruct player one to choose a position
+    # instruct player one to choose a position  
     print "Player One >> Please select one coordinate for your move (eg. a3): "
     player_one_move = gets.chomp.downcase
+    puts
 
     # present the board with the position of player one
-    move_on_board(player_one_move, board)
+    move_on_board(player_one_move, board, 1)
+    puts
 
     # instruct player two to choose a position
     print "Player Two >> Please select one coordinate for your move (eg. a3): "
     player_two_move = gets.chomp.downcase
+    puts
 
     # place player_one_move into the board
-    move_on_board(player_two_move, board)
+    move_on_board(player_two_move, board, 2)
+    puts
 
     # check if they are a winner
 
