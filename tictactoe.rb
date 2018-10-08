@@ -112,14 +112,14 @@ puts display_board(board)
 sleep 1
 
 # player one turn
-def player_one_turn board, num
+def player_turn board, player
 
-        print "Player One >> Please select one coordinate for your move (eg. A3): "
-        player_one_move = gets.chomp.downcase
+        print "Player #{player} >> Please select one coordinate for your move (eg. A3): "
+        player_move = gets.chomp.downcase
         puts
 
-        if user_choice(board, player_one_move) == " "
-            move_on_board(player_one_move, board, "X")
+        if user_choice(board, player_move) == " "
+            move_on_board(player_move, board, player)
             display_board(board)
             puts
             check_for_winner(board)
@@ -127,44 +127,33 @@ def player_one_turn board, num
             print "That spot is taken! Try again: "
             new_turn = gets.chomp.downcase
             puts
-            move_on_board(new_turn, board, "X")
+            move_on_board(new_turn, board, player)
             display_board(board)
             puts
             check_for_winner(board)
         end
 
 end
-
-# player two turn
-def player_two_turn board, num
-
-        print "Player Two >> Please select one coordinate for your move (eg. A3): "
-        player_two_move = gets.chomp.downcase
-        puts
-
-        if user_choice(board, player_two_move) == " "
-            move_on_board(player_two_move, board, "O")
-            display_board(board)
-            puts
-            check_for_winner(board)
-        else
-            print "That spot is taken! Try again: "
-            new_turn = gets.chomp.downcase
-            puts
-            move_on_board(new_turn, board, "O")
-            display_board(board)
-            puts
-            check_for_winner(board)
-        end
-
-end 
 
 # create loop until there is a win, draw or they would like to cancel the game
-while true
+counter = 0
+while counter <= 9
 
-    player_one_turn(board, 1)
-        
-    player_two_turn(board, 2)
+    counter += 1
+    if counter % 2 != 0
+        player = "X"
+    else
+        player = "O"
+    end
+
+    player_turn(board, player)
+
+    if counter == 9
+        puts "It's a draw!"
+        puts
+        exit
+    end
 
 end
+
 
