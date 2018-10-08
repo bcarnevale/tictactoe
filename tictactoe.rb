@@ -118,6 +118,13 @@ def player_turn board, player
         player_move = gets.chomp.downcase
         puts
 
+        if player_move == "q"
+            puts "Thanks for playing! Goodbye."
+            puts
+            sleep 1
+            exit
+        end
+
         while true
             if user_choice(board, player_move) == " "
                 move_on_board(player_move, board, player)
