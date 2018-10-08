@@ -118,19 +118,15 @@ def player_turn board, player
         player_move = gets.chomp.downcase
         puts
 
-        if user_choice(board, player_move) == " "
-            move_on_board(player_move, board, player)
-            display_board(board)
-            puts
-            check_for_winner(board)
-        else
-            print "That spot is taken! Try again: "
-            new_turn = gets.chomp.downcase
-            puts
-            move_on_board(new_turn, board, player)
-            display_board(board)
-            puts
-            check_for_winner(board)
+        while true
+            if user_choice(board, player_move) == " "
+                move_on_board(player_move, board, player)
+                break
+            else
+                print "That spot is taken! Try again: "
+                player_move = gets.chomp.downcase
+                puts
+            end
         end
 
 end
@@ -147,6 +143,11 @@ while counter <= 9
     end
 
     player_turn(board, player)
+    puts
+    system 'clear'
+    display_board(board)
+    puts
+    check_for_winner(board)
 
     if counter == 9
         puts "It's a draw!"
