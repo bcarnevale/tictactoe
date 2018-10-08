@@ -1,8 +1,9 @@
 require 'colorize'
 
-# method for displaying the tictactoe board
+# an array that displays players moves
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
+# method which displays the board to users
 def display_board board
 
     puts "  1   2   3"
@@ -14,7 +15,7 @@ def display_board board
 
 end
 
-# method for all possible choices
+# method to display all possible choices and their corresonponding position on the board
 def user_choice board, move
 
     if move == "a1"
@@ -36,11 +37,12 @@ def user_choice board, move
     elsif move == "c3"
         board_position = board[8]
     end
+
     return board_position
 
 end
 
-# method to place the players move on the board
+# method to place the players choive of move on the board
 def move_on_board move, board, token
 
     if move == "a1"
@@ -70,9 +72,9 @@ def move_on_board move, board, token
 
 end
 
-# method for checking if there is a winner or draw
+# method for checking if there is a winner
 def check_for_winner board
-
+    
     winner_combinations = [
         [board[0], board[1], board[2]],
         [board[0], board[4], board[8]],
@@ -85,18 +87,21 @@ def check_for_winner board
     ]
 
     winner_combinations.each do |item| 
+
         if item[0] == "X" && item[1] == "X" && item[2] == "X"
-            puts "Player One wins!"
+            puts "Congratulations!! Player X wins!"
             puts
             sleep 1
             exit 
         elsif item[0] == "O" && item[1] == "O" && item[2] == "O"
-            puts "Player Two wins!"
+            puts "Congratulations!! Player O wins!"
             puts
             sleep 1
             exit
         end
+
     end
+
 end
 
 # Start of the game
@@ -104,44 +109,51 @@ puts "Let's play Tic Tac Toe!"
 puts
 sleep 1
 
-puts "Press q at any players turn to quit."
+puts "Press q at any turn to quit the game"
 puts
 sleep 1
 
 puts display_board(board)
 sleep 1
 
-# player one turn
+# method for each players turn to make a move
 def player_turn board, player
 
-        print "Player #{player} >> Please select one coordinate for your move (eg. A3): "
-        player_move = gets.chomp.downcase
+    # ask a player to select their move
+    print "Player #{player} >> Please select one coordinate for your move (eg. A3): "
+    player_move = gets.chomp.downcase
+    puts
+
+    # allows players to quit the game
+    if player_move == "q"
+        puts "Thanks for playing! Goodbye :)"
         puts
+        sleep 1
+        exit
+    end
 
-        if player_move == "q"
-            puts "Thanks for playing! Goodbye."
+    # loop until the player has made a valid move
+    while true
+
+        if user_choice(board, player_move) == " "
+            move_on_board(player_move, board, player)
+            break
+        else
+            print "Oops! That spot is taken. Try again: "
+            player_move = gets.chomp.downcase
             puts
-            sleep 1
-            exit
         end
 
-        while true
-            if user_choice(board, player_move) == " "
-                move_on_board(player_move, board, player)
-                break
-            else
-                print "That spot is taken! Try again: "
-                player_move = gets.chomp.downcase
-                puts
-            end
-        end
+    end
 
 end
 
-# create loop until there is a win, draw or they would like to cancel the game
+# game loop until there is a win, draw or a player quits
 counter = 0
+
 while counter <= 9
 
+    # selecting whether the player is an "X" or an "O"
     counter += 1
     if counter % 2 != 0
         player = "X"
@@ -149,6 +161,7 @@ while counter <= 9
         player = "O"
     end
 
+    # once the player has had their turn, displaying the updated board
     player_turn(board, player)
     puts
     system 'clear'
@@ -156,6 +169,7 @@ while counter <= 9
     puts
     check_for_winner(board)
 
+    # once the counter reaches nine, there are no more choices for moves on the board. This will mean, there is a draw
     if counter == 9
         puts "It's a draw!"
         puts
