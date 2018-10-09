@@ -22,4 +22,4 @@ Below displays how the game will begin:
 The hardest challenge faced whilst building this Tic Tac Toe application, was the checking for availability method. At first, I was able to create a method which could calculate that the selected move was already taken, however, it would then override the player's token who was in that position first. 
 This challenge was overcome through sectioning off more code and creating more methods.
 
-Another challenge was based around the multiple loops neccessary to have a functioning Tic Tac Toe game. After hoping to use the .each method more often, I realised my code was much cleaner and easier to follow by again, creating more concise methods.
+Another challenge was based around the multiple loops neccessary to have a functioning Tic Tac Toe game. After hoping to use the '.each' method more often, I realised my code was much cleaner and easier to follow by again, creating more concise methods.

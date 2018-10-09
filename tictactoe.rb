@@ -1,6 +1,6 @@
 require 'colorize'
 
-# an array that displays players moves
+# an array that holds players moves
 board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
 
 # method which displays the board to users
@@ -15,7 +15,7 @@ def display_board board
 
 end
 
-# method to display all possible choices and their corresonponding position on the board
+# method to assign all possible choices to their corresonponding position on the board
 def user_choice board, move
 
     if move == "a1"
