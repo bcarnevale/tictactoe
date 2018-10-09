@@ -42,7 +42,7 @@ def user_choice board, move
 
 end
 
-# method to place the players choive of move on the board
+# method to place the players choice of move on the board
 def move_on_board move, board, token
 
     if move == "a1"
@@ -65,9 +65,6 @@ def move_on_board move, board, token
             board[8] = "#{token}"
     elsif move == "q"
         exit
-    else
-        puts "Oops! That move does not exist, try again."
-        puts
     end
 
 end
@@ -89,12 +86,12 @@ def check_for_winner board
     winner_combinations.each do |item| 
 
         if item[0] == "X" && item[1] == "X" && item[2] == "X"
-            puts "Congratulations!! Player X wins!"
+            puts "Player X wins! You are the Tic Tac Toe Master!".colorize(:red)
             puts
             sleep 1
             exit 
         elsif item[0] == "O" && item[1] == "O" && item[2] == "O"
-            puts "Congratulations!! Player O wins!"
+            puts "Player O wins! You are the Tic Tac Toe Master!".colorize(:red)
             puts
             sleep 1
             exit
@@ -126,10 +123,10 @@ def player_turn board, player
 
     # allows players to quit the game
     if player_move == "q"
-        puts "Thanks for playing! Goodbye :)"
+        puts "Thanks for playing! Goodbye :)".colorize(:red)
         puts
         sleep 1
-        exit
+        exit 
     end
 
     # loop until the player has made a valid move
@@ -139,7 +136,7 @@ def player_turn board, player
             move_on_board(player_move, board, player)
             break
         else
-            print "Oops! That spot is taken. Try again: "
+            print "Oops! That move is invalid. Try again: "
             player_move = gets.chomp.downcase
             puts
         end
@@ -161,7 +158,7 @@ while counter <= 9
         player = "O"
     end
 
-    # once the player has had their turn, displaying the updated board
+    # once the player has had their turn, the updated board is displayed
     player_turn(board, player)
     puts
     system 'clear'
@@ -171,7 +168,7 @@ while counter <= 9
 
     # once the counter reaches nine, there are no more choices for moves on the board. This will mean, there is a draw
     if counter == 9
-        puts "It's a draw!"
+        puts "It's a draw!".colorize(:red)
         puts
         exit
     end
